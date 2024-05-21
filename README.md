@@ -18,10 +18,10 @@
 
 
 -------------
-[Самостоятельная работа 1.2](presintations/Суворов%20Роман%20ИВТ%202.1%20бд%20ср%201.2.pptx)
+## [Самостоятельная работа 1.2](presintations/Суворов%20Роман%20ИВТ%202.1%20бд%20ср%201.2.pptx)
 
 -------------
-[Самостоятельная работа 1.3](presintations/Суворов%20Роман%20ИВТ%202.1%20бд%20ср%201.3.pptx)
+## [Самостоятельная работа 1.3](presintations/Суворов%20Роман%20ИВТ%202.1%20бд%20ср%201.3.pptx)
 -------------
 
 ## СР 1.4
@@ -122,7 +122,7 @@ for document in result:
 ![](images/12.png)
 
 --------------
-[Самостоятельная работа 2.2](presintations/Суворов%20Роман%20ИВТ%202.1%20БД%20лр2.2.2.pptx)
+## [Самостоятельная работа 2.2](presintations/Суворов%20Роман%20ИВТ%202.1%20БД%20лр2.2.2.pptx)
 
 --------------
 ## СР 3.2
@@ -195,3 +195,181 @@ for document in result:
 2. **Идентификация избыточности**: Определите дублирование данных, избыточную нормализацию и ненужные атрибуты.
 3. **Нормализация**: Примените нормализацию для устранения избыточности и повышения целостности данных. Это может включать объединение таблиц, разделение таблиц и оптимизацию структуры.
 4. **Оптимизация запросов**: Пересмотрите запросы к базе данных после нормализации для обеспечения их эффективности и оптимизируй
+
+-----
+## ИСР 4.1
+
+### Шаг 1: Создание таблицы Customer
+```sql
+CREATE TABLE Customer (
+    customer_num INT PRIMARY KEY,
+    customer_name VARCHAR(100) NOT NULL,
+    customer_address VARCHAR(255) NOT NULL,
+    customer_phone VARCHAR(15) NOT NULL
+);
+```
+
+### Шаг 2: Создание таблицы Product
+```sql
+CREATE TABLE Product (
+    catalog_num INT PRIMARY KEY,
+    product_name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
+);
+```
+
+### Шаг 3: Создание таблицы Order
+```sql
+CREATE TABLE CustomerOrder (
+    order_num INT PRIMARY KEY,
+    customer_num INT NOT NULL,
+    order_date DATE NOT NULL,
+    FOREIGN KEY (customer_num) REFERENCES Customer(customer_num)
+);
+```
+
+### Шаг 4: Создание таблицы OrderItem
+```sql
+CREATE TABLE OrderItem (
+    order_num INT NOT NULL,
+    catalog_num INT NOT NULL,
+    quantity INT NOT NULL,
+    PRIMARY KEY (order_num, catalog_num),
+    FOREIGN KEY (order_num) REFERENCES CustomerOrder(order_num),
+    FOREIGN KEY (catalog_num) REFERENCES Product(catalog_num)
+);
+```
+
+### Результат:
+![](images/13.png)
+
+-----
+## ВСР 4.2
+
+
+### Создание Элемент
+```sql
+CREATE TABLE Элемент (
+    ElemID SERIAL PRIMARY KEY,
+    ElemName VARCHAR(50) NOT NULL
+);
+```
+![](images/14.png)
+
+
+### Создание элемент1
+```sql 
+CREATE TABLE Элемент1 (
+    ElemID1 INT,
+    ElemID2 INT,
+    ElemName VARCHAR(50) NOT NULL,
+    PRIMARY KEY (ElemID1, ElemID2)
+);
+```
+![](images/15.png)
+
+
+### Создание Элементы
+```sql
+CREATE TABLE Элементы (
+    ElementsID SERIAL PRIMARY KEY,
+    ElemID INT NOT NULL,
+    Comment TEXT,
+    FOREIGN KEY (ElemID) REFERENCES Элемент (ElemID)
+);
+```
+![](images/16.png)
+
+
+### Создание book
+```sql
+CREATE TABLE Book (
+    BookID SERIAL PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    AuthorID INT NOT NULL,
+    Genre VARCHAR(100),
+    UNIQUE (Title),
+    FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID)
+);
+```
+![](images/17.png)
+
+
+### Создание BookStatus
+```sql
+CREATE TABLE BookStatus (
+    StatusID SERIAL PRIMARY KEY,
+    StatusName VARCHAR(50) NOT NULL UNIQUE
+);
+```
+![](images/18.png)
+
+
+### Создание BookInLib 
+```sql
+CREATE TABLE BookInLib (
+    LibraryID INT,
+    BookID INT,
+    StatusID INT,
+    CONSTRAINT pk_LibraryBook PRIMARY KEY (LibraryID, BookID),
+    FOREIGN KEY (LibraryID) REFERENCES Library(LibraryID),
+    FOREIGN KEY (BookID) REFERENCES Book(BookID),
+    FOREIGN KEY (StatusID) REFERENCES BookStatus(StatusID)
+);
+```
+![](images/19.png)
+
+
+### Создание столбцов в Элемент1
+```sql
+ALTER TABLE Элемент1
+ADD COLUMN info VARCHAR(200);
+```
+![](images/20.png)
+
+
+### Добавляется ограничение уникальности
+```sql
+ALTER TABLE Элемент1
+ADD CONSTRAINT un_info UNIQUE(info);
+```
+![](images/20.png)
+
+### Добавляется столбец в "BookStatus"
+```sql
+ALTER TABLE BookStatus
+ADD COLUMN Comment VARCHAR(200) NOT NULL;
+```
+![](images/21.png)
+
+
+### Создание newbook
+```sql
+CREATE TABLE NewBook (
+    BookID INT PRIMARY KEY,
+    Title VARCHAR(255) NOT NULL,
+    AuthorID INT NOT NULL,
+    Genre VARCHAR(100),
+    PublishDate DATE
+);
+```
+![](images/22.png)
+
+
+### Добавление в newbook
+```sql
+INSERT INTO NewBook (BookID, Title, AuthorID, Genre, PublishDate)
+SELECT BookID, Title, AuthorID, Genre, PublishDate
+FROM Book
+WHERE EXTRACT(YEAR FROM PublishDate) > 2000;
+```
+![](images/23.png)
+
+
+### Дроп newbook
+```sql
+DROP TABLE NewBook;
+```
+![](images/24.png)
+
+

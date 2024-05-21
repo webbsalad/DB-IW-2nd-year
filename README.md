@@ -16,8 +16,7 @@
 | ENUM         | Перечислимый тип данных, допускающий только одно из заданных значений.                         |
 | SET          | Множественный тип данных, допускающий набор заданных значений.                                |
 
-
-<hr style="border: 7px solid grey;">
+<hr style="border: 10px solid grey;">
 
 ## [Самостоятельная работа 1.2](presintations/Суворов%20Роман%20ИВТ%202.1%20бд%20ср%201.2.pptx)
 
@@ -25,7 +24,7 @@
 
 ## [Самостоятельная работа 1.3](presintations/Суворов%20Роман%20ИВТ%202.1%20бд%20ср%201.3.pptx)
 
-<hr style="border: 7px solid grey;">
+<hr style="border: 10px solid grey;">
 
 ## СР 1.4
 была развернута база данных mongodb с использованием команды:
@@ -56,7 +55,7 @@ for document in result:
 ![](images/4.png)
 
 
-<hr style="border: 7px solid grey;">
+<hr style="border: 10px solid grey;">
 
 ## СР 2.1
 
@@ -124,11 +123,11 @@ for document in result:
 - Структура: Дерево, Граф.
 ![](images/12.png)
 
-<hr style="border: 7px solid grey;">
+<hr style="border: 10px solid grey;">
 
 ## [Самостоятельная работа 2.2](presintations/Суворов%20Роман%20ИВТ%202.1%20БД%20лр2.2.2.pptx)
 
-<hr style="border: 7px solid grey;">
+<hr style="border: 10px solid grey;">
 
 ## СР 3.2
 : Анализ Базы Данных на Избыточность
@@ -201,7 +200,7 @@ for document in result:
 3. **Нормализация**: Примените нормализацию для устранения избыточности и повышения целостности данных. Это может включать объединение таблиц, разделение таблиц и оптимизацию структуры.
 4. **Оптимизация запросов**: Пересмотрите запросы к базе данных после нормализации для обеспечения их эффективности и оптимизируй
 
-<hr style="border: 7px solid grey;">
+<hr style="border: 10px solid grey;">
 
 
 ## ИСР 4.1
@@ -250,7 +249,7 @@ CREATE TABLE OrderItem (
 ### Результат:
 ![](images/13.png)
 
-<hr style="border: 7px solid grey;">
+<hr style="border: 10px solid grey;">
 
 ## ВСР 4.2
 
